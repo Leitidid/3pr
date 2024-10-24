@@ -1,11 +1,10 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace Libmas
 {
     public static class masHelp
     {
-        // Заполнение массива случайными числами от 1 до 10
+        // Заполнение массива числами от 1 до 10
         public static void zapolneniemas(int[,] array)
         {
             Random random = new Random();
@@ -13,7 +12,6 @@ namespace Libmas
             {
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    // Генерируем случайное число от 1 до 10
                     array[i, j] = random.Next(1, 11);
                 }
             }
@@ -31,7 +29,7 @@ namespace Libmas
             }
         }
 
-        // Сохранение массива в файл
+        // Сохранение массива 
         public static void Savemas(int[] mas, string file)
         {
             using (StreamWriter writer = new StreamWriter(file))
@@ -43,7 +41,7 @@ namespace Libmas
             }
         }
 
-        // Загрузка массива из файла
+        // Загрузка массива 
         public static int[] Loadmas(string file)
         {
             if (!File.Exists(file))

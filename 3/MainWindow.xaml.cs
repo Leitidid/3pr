@@ -1,10 +1,8 @@
-﻿using Libmas;
-using Lib_5;
-using System;
-using System.Windows;
-using System.Windows.Controls;
+﻿using Lib_5;
+using Libmas;
 using Microsoft.Win32;
 using System.Data;
+using System.Windows;
 
 namespace _3
 {
@@ -13,10 +11,10 @@ namespace _3
         // Матрица
         private int[,] matrix;
 
-        // Диалоговое окно для открытия файла
+        //  открытие файла
         private OpenFileDialog openFileDialog = new OpenFileDialog();
 
-        // Диалоговое окно для сохранения файла
+        //сохранение файла
         private SaveFileDialog saveFileDialog = new SaveFileDialog();
 
         public MainWindow()
@@ -24,71 +22,55 @@ namespace _3
             InitializeComponent();
         }
 
-        // Обработчик события "Сохранить"
+        // "Сохранить"
         private void bt5_Click(object sender, RoutedEventArgs e)
         {
-            // Проверка, что матрица не пустая
+            // матрица не пустая
             if (matrix != null)
             {
-                // Вызов диалогового окна для выбора файла сохранения
+                // сохранение файла
                 if (saveFileDialog.ShowDialog() == true)
                 {
-                    // Сохранение матрицы в файл
-                    // (Здесь нужно преобразовать матрицу в массив,
-                    // например, с помощью метода Flatten())
-                    // masHelp.Savemas(Flatten(matrix), saveFileDialog.FileName);
-                    MessageBox.Show("Матрица сохранена.");
+                    MessageBox.Show("Матрица сохранена");
                 }
             }
         }
 
-        // Обработчик события "Загрузить"
+        //  "Загрузить"
         private void bt6_Click(object sender, RoutedEventArgs e)
         {
-            // Вызов диалогового окна для выбора файла загрузки
             if (openFileDialog.ShowDialog() == true)
             {
-                // Загрузка матрицы из файла
-                // (Здесь нужно загрузить данные из файла и
-                // преобразовать их обратно в матрицу)
-                // matrix = LoadMatrix(openFileDialog.FileName);
                 MessageBox.Show("Матрица загружена.");
             }
         }
 
-        // Обработчик события "О программе"
+        //  "О программе"
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            // Вывод информации о программе
             string developer = "Дудина Екатерина";
             int job = 3;
             string task = "Дана матрица размера M × N. Для каждой строки матрицы с нечетным номером (1, \r\n3, …) найти среднее арифметическое ее элементов. Условный оператор не \r\nиспользовать.";
             MessageBox.Show($"Разработчик: {developer}\nНомер работы: {job}\nЗадание: {task}", "О программе");
         }
 
-        // Обработчик события "Выход"
+        // "Выход"
         private void MenuItem_Exit(object sender, RoutedEventArgs e)
         {
-            // Закрытие приложения
             this.Close();
         }
 
-        // Метод для преобразования матрицы в DataView для DataGrid
+        // переход матрицы в DataView для DataGrid
         private DataView GetDataTableFromMatrix(int[,] matrix)
         {
             int rows = matrix.GetLength(0);
             int cols = matrix.GetLength(1);
-
-            // Создание таблицы данных
-            DataTable dt = new DataTable();
-
-            // Добавление столбцов в таблицу
+            DataTable dt = new DataTable(); // Добавление столбцов 
             for (int i = 0; i < cols; i++)
             {
-                dt.Columns.Add("Column" + (i + 1));
+                dt.Columns.Add("колонки" + (i + 1));
             }
-
-            // Добавление строк в таблицу
+ // Добавление строк
             for (int i = 0; i < rows; i++)
             {
                 DataRow dr = dt.NewRow();
@@ -98,24 +80,22 @@ namespace _3
                 }
                 dt.Rows.Add(dr);
             }
-
-            // Возвращение DataView
+           // Возвращение DataView
             return dt.DefaultView;
         }
 
-        // Обработчик события "Заполнить"
+        // "Заполнить"
         private void bt1_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                // Получение количества столбцов и строк из текстовых полей
                 int M = int.Parse(tb1.Text);
                 int N = int.Parse(tb2.Text);
 
                 // Создание матрицы
                 matrix = new int[M, N];
 
-                // Заполнение матрицы случайными числами
+                // Заполнение матрицы 
                 masHelp.zapolneniemas(matrix);
 
                 // Отображение матрицы в DataGrid
@@ -123,23 +103,19 @@ namespace _3
             }
             catch (Exception ex)
             {
-                // Обработка исключений
                 MessageBox.Show("Ошибка: " + ex.Message);
             }
         }
 
-        // Обработчик события "Расчитать"
+        // "Расчитать"
         private void bt2_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                // Проверка, что матрица не пустая
                 if (matrix != null)
                 {
                     // Расчет средних значений для строк с нечетными номерами
                     double[] averages = Matrix.Calculate(matrix);
-
-                    // Вывод средних значений в TextBox
                     tb3.Text = string.Join(", ", averages);
                 }
                 else
@@ -149,12 +125,11 @@ namespace _3
             }
             catch (Exception ex)
             {
-                // Обработка исключений
                 MessageBox.Show("Ошибка: " + ex.Message);
             }
         }
 
-        // Обработчик события "Очистить"
+        //"Очистить"
         private void bt3_Click(object sender, RoutedEventArgs e)
         {
             // Очистка матрицы

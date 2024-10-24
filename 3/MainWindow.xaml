@@ -14,9 +14,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel HorizontalAlignment="Left" Margin="2,45,0,0" Orientation="Vertical" VerticalAlignment="Top">
-            <Label Content="введите кол-во столбцов матрицы" Height="28" Width="208"/>
+            <Label Content="введите кол-во строк матрицы" Height="28" Width="208"/>
             <TextBox x:Name="tb1" Height="22" TextWrapping="Wrap" Width="215" />
-            <Label Content="введите кол-во строк матрицы" Height="36" Width="208"/>
+            <Label Content="введите кол-во стобцов к матрицы" Height="36" Width="208"/>
             <TextBox x:Name="tb2" Height="22" TextWrapping="Wrap" Width="215"/>
             <Button x:Name="bt1" Content="Заполнить" Height="22" Width="216" Click="bt1_Click"/>
             <Grid>
